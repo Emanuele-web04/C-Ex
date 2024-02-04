@@ -19,25 +19,30 @@ eb ot ton ro eb ot
 #include <stdlib.h>
 #include <string.h>
 #define MAX 50
+void store(int len, char v[MAX], char cpy[MAX]);
 int main(int argc, char* argv[]) {
     
     //qua facciamo la copia in un vettore e printiamo il vettore tutto al contrario
     long int len = strlen(argv[1]);
-    char v[len];
-    char cpy[len];
+    char v[MAX];
+    char cpy[MAX];
     strcpy(cpy, argv[1]);
     int i;
     if(len>MAX) {
         return 1;
     }
-    for(i=0; i<len; i++) {
-        v[i]=cpy[len-i-1];
-    }
-    for(i=0; i<len; i++) {
-        printf("%c", v[i]);
-    }
+    store(len, v, cpy);
+    
     printf("\n");
     
     
     return 0;
+}
+void store(int len, char v[MAX], char cpy[MAX]) {
+     for(int i=0; i<len; i++) {
+        v[i]=cpy[len-i-1];
+    }
+    for(int i=0; i<len; i++) {
+        printf("%c", v[i]);
+    }
 }
