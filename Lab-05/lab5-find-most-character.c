@@ -30,9 +30,7 @@ int main(int argc, char* argv[]){
     long int len = strlen(cpy);
     
     int counter;
-    int k=0;
     int store_counter[len];
-    
     store(cpy, store_counter, &len, argv);
      
     int max_value = store_counter[0];
