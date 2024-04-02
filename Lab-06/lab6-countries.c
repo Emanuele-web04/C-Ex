@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 	printf("\n%s\n", c1.name);
 	printf("\n%s\n", c1.cap);
 	printf("\n%.2f million people\n", c1.population);
-	printf("\n%d km2\n", c1.size);
+	printf("\n%d km2", c1.size);
 
 	return 0;
 }
