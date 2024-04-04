@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     llsprint(head);
     printf("\n");
     pop(&head);
-    pop(&head);
+    pop(&head); 
     for(int j = 0; j < 2; j++)
     {
        head = append(head, atoi(argv[argc - 2 + j]));
