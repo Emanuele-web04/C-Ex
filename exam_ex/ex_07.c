@@ -54,12 +54,14 @@ Node* create_array(char array[])
     Node* head = NULL;
     for(int i = 0; i < strlen(array); i++)
     {
-        Node* new = malloc(sizeof(Node));
-        new -> pos = i;
-        new -> c = array[i];
-        new -> next = NULL;
+        if(array[i] == 'a' || array[i] == 'e' || array[i] == 'i' || array[i] == 'o' || array[i] == 'u') {
+            Node* new = malloc(sizeof(Node));
+            new -> pos = i;
+            new -> c = array[i];
+            new -> next = NULL;
         //e poi vai avanti aggiungendo
-        head = add_element(head, new);
+            head = add_element(head, new);
+        }
     }
 
     return head;
@@ -77,16 +79,9 @@ Node* add_element(Node* head, Node* new)
 void displayList(Node* head)
 {
     if( head ) {
-        if( 
-        head -> c == 'a' 
-        || head -> c == 'e' 
-        || head -> c == 'i' 
-        || head -> c == 'o' 
-        || head -> c == 'u' 
-        ) 
-        {
-            printf("(%d, %c) -> ", head -> pos, head -> c);
-        }
+        
+        printf("(%d, %c) -> ", head -> pos, head -> c);
+        
         displayList(head -> next);
     } else {
         printf("NULL\n");
