@@ -67,7 +67,6 @@ void displayMat(int** mat, char** argv)
         }
         printf("\n");
     }
-
 }
 
 void freeMat(int** mat, char** argv)
@@ -123,5 +122,4 @@ void mini_max_pari_dispari(int **mat, char** argv)
     }
     
     printf("somma massima colonne: %d\n", maxSum);
-
 }
