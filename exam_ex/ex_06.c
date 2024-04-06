@@ -41,6 +41,7 @@ void displayMat(int** mat);
 void binaryMat(int** mat);
 void binaryCharMat(int** mat, char c);
 void displayCharMat(int** mat);
+void freeMat(int** mat);
 
 int main(int argc, char** argv)
 {
@@ -59,6 +60,7 @@ int main(int argc, char** argv)
     
     displayCharMat(mymat);
     
+    freeMat(mymat);
     return 0;
 }
 
@@ -153,5 +155,12 @@ void binaryCharMat(int** mat, char c)
 
     }
     
+}
+
+void freeMat(int** mat)
+{
+    for(int i = 0; i < R_C; i++)
+        free(mat[i]);
+    free(mat);
 }
 
