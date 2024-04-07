@@ -46,6 +46,7 @@ Digit* createBinary(int val)
         i++;
         val = val / 2;
     }
+    printf("%d\n", i);
     Digit* dval = malloc(sizeof(Digit));
     dval -> d = malloc(sizeof(int) * i);
     return dval; 
@@ -54,10 +55,10 @@ Digit* createBinary(int val)
 void Det2Dig(int val, Digit *dval)
 {
     //sto while serve per contare quante cifre mi servono per allocare la mem
-    int j = i;
+    int j = i - 1;
   
     int tmp = val;
-    while(j > 0)
+    while(j >= 0)
     {
         dval -> d[j] = tmp % 2; 
         printf("%d ", dval -> d[j]);
@@ -65,7 +66,7 @@ void Det2Dig(int val, Digit *dval)
         j--;
     }   
     
-printf("%d\n", i);
+
     printf("La conversione in binario di %d è: ", val);
     for(int k = 0; k < i; k++)
         printf("%d ", dval -> d[k]);
