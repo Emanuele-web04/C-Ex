@@ -69,6 +69,6 @@ void display(Digit* head)
 {
     if( head ) {
         display(head -> next);
-        printf("%d -> ", head -> bit);   
-    } 
+        printf("%d -> ", head -> bit);
+    }
 }
