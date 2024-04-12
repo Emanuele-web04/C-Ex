@@ -37,6 +37,8 @@ struct treno {
 
 //funzione che crea il treno allocato dinamicamente
 Treno* creaTreno(int carr);
+//add in head
+Treno* add_in_head(Treno* t, Carrozza* carro);
 //funzione che mi assegna i posti in maniera randomica
 void assegna_posti_random(Carrozza* carro);
 //funzione che crea la carrozza allocata dinamicamente
@@ -65,14 +67,31 @@ Treno* creaTreno(int carr)
 {
     Treno* T = malloc(sizeof(Treno));
     for(int i = 0; i < carr; i++)
-        T -> head = creaCarrozza();
+    {
+        Carrozza* new_carrozza = creaCarrozza();
+        T = add_in_head(T, new_carrozza);
+    }
 
     return T;
 }
 
+Treno* add_in_head(Treno* t, Carrozza* carro)
+{
+    if(t -> head == NULL) {
+        t -> head = carro;
+        return t;
+    } 
+    //sposta quello di adesso a quello dopo
+    Carrozza* linkToNext = carro -> next;
+    t -> head = carro;
+    carro -> next = linkToNext;
+
+    return t;
+}
+
 void assegna_posti_random(Carrozza* carro)
 {
-    for(int i = 0; i < 100; i++) 
+    for(int i = 1; i < 101; i++) 
     {
         carro -> posti[i] = rand() % 2;
         printf("%d ", carro -> posti[i]);
@@ -93,7 +112,7 @@ Carrozza* creaCarrozza()
 int prenota_posto(Treno* T, int carr)
 {
     Carrozza* carr_prenotata = T -> head;
-    for(int j = 0; j < 100; j++)
+    for(int j = 1; j < 101; j++)
     {
         if(carr_prenotata -> posti[j] == 0) {
             carr_prenotata -> posti[j] = 1;
