@@ -36,16 +36,15 @@
 #define C 3
 #define DIM_MATRIX 9
 
-int** mat(int row, int col);
+int** mat();
 //la media
 int average(int** mat);
-
 void RimpiazzaMaggiori(int **mat, char* c);
 void freeAll(int** mat, char* c);
 
 int main(int argc, char** argv)
 {
-    int** mymat = mat(R, C);
+    int** mymat = mat();
     char *c = malloc(sizeof(char));
     strcpy(c, argv[argc - 1]);
     //passo i valoRi a mymat Con atoi aRgv
@@ -59,13 +58,13 @@ int main(int argc, char** argv)
     return 0;
 }
 
-int** mat(int row, int col)
+int** mat()
 {
     //alloCaRe dinamiCamente
     //CReo solo lo spazio ma non passo valoRi
-    int** mat = malloc(sizeof(int*) * row);
-    for(int i = 0; i < row; i++)
-        mat[i] = malloc(sizeof(int) * col);
+    int** mat = malloc(sizeof(int*) * R);
+    for(int i = 0; i < R; i++)
+        mat[i] = malloc(sizeof(int) * C);
 
     return mat;
 }
