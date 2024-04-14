@@ -30,6 +30,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define R 3
 #define C 3
@@ -39,17 +40,22 @@ int** mat(int row, int col);
 //la media
 int average(int** mat);
 
-void RimpiazzaMaggiori(int **mat);
+void RimpiazzaMaggiori(int **mat, char* c);
+void freeAll(int** mat, char* c);
 
 int main(int argc, char** argv)
 {
     int** mymat = mat(R, C);
+    char *c = malloc(sizeof(char));
+    strcpy(c, argv[argc - 1]);
     //passo i valoRi a mymat Con atoi aRgv
     for(int i = 0; i < DIM_MATRIX; i++)
         mymat[i / C][i % C] = atoi(argv[1 + i]);
 
     int avg_mat = average(mymat);
-    RimpiazzaMaggiori(mymat);
+    RimpiazzaMaggiori(mymat, c);
+
+    freeAll(mymat, c);
     return 0;
 }
 
@@ -77,7 +83,7 @@ int average(int** mat)
     return average_all;    
 }
 
-void RimpiazzaMaggiori(int **mat)
+void RimpiazzaMaggiori(int **mat, char* c)
 {
     int avg_mat = average(mat);
     for(int i = 0; i < R; i++)
@@ -86,11 +92,22 @@ void RimpiazzaMaggiori(int **mat)
         {
             if(mat[i][j] >= avg_mat) {
                 mat[i][j] = 1;
+                printf("%s", c);
             } else {
                 mat[i][j] = 0;
+                printf(" ");
             }
-            printf("%d ", mat[i][j]);
         }
         printf("\n");
     }
+}
+
+void freeAll(int** mat, char* c)
+{
+    //freeare la matrice
+    for(int i = 0; i < R; i++)
+        free(mat[i]);
+    free(mat);
+
+    free(c);
 }
