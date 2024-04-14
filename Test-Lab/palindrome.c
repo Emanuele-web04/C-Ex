@@ -63,6 +63,7 @@ Stack* createStack(int len)
 
 void mallocInputAndPushingValues(Stack* s, char* word, int len)
 {
+    s -> arr = malloc(sizeof(char) * len);
     printf("Parola originale: ");
     for(int i = 0; i < len; i++)
     {
