@@ -45,6 +45,8 @@ void assegna_posti_random(Carrozza* carro);
 Carrozza* creaCarrozza();
 //funzione per prenotare i posti
 int prenota_posto(Treno* T, int carr);
+//free
+void freeCarr(Carrozza* head);
 
 int main(int argc, char** argv) 
 {
@@ -60,6 +62,7 @@ int main(int argc, char** argv)
         printf("Posto prenotato: carrozza %d al posto %d\n", carr, posto_prenotato);
     }
 
+    free(T);
     return 0;
 }
 
@@ -124,4 +127,11 @@ int prenota_posto(Treno* T, int carr)
     return -1;
 }
 
+void free_Carrozze(Carrozza *head){
+  if( head == NULL){
+    return;
+  }
+  free_Carrozze(head -> next);
+  free(head);
+}
 
