@@ -55,7 +55,6 @@ int main(int argc, char** argv)
 Stack* createStack(int len)
 {
     Stack* s = malloc(sizeof(Stack));
-    s -> arr = malloc(sizeof(char) * len);
     s -> top = -1;
 
     return s;

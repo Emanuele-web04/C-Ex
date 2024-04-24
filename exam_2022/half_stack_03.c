@@ -15,72 +15,65 @@
 typedef struct stack Stack;
 struct stack {
     int top;
-    int arr[100];
+    int v[100];
 };
 
-Stack* createStack(int v[], int n);
+Stack* createStack();
 void Push_vec(Stack *s, int v[], int n);
 int* Pop_vec(Stack* s, int n);
-void print(Stack* s, int n);
+void freeAll(Stack* s, int* v);
 
 int main(int argc, char** argv)
 {
-    int v[100];
     int n = argc - 1;
-
+    int v[argc - 1];
     for(int i = 0; i < n; i++)
         v[i] = atoi(argv[1 + i]);
-    
-    Stack* mystack = createStack(v, n);
 
-    print(mystack, n);
-    //printf("%d\n", mystack -> top); //s -> top == 9, perchè parto da 0, quindi faccio da x fino a x - 1
-    int* poppedVals = Pop_vec(mystack, n);
+    Stack* my_s = createStack();
+    Push_vec(my_s, v, n);
+
+    int* halfStack = Pop_vec(my_s, n);
+
     for(int i = 0; i < n / 2; i++)
-        printf("%d ", poppedVals[i]);
+        printf("%d ", halfStack[i]);
+    printf("\n");
 
-    free(mystack);
-    free(poppedVals);
+    freeAll(my_s, halfStack);
     return 0;
 }
 
-//creo lo stack
-Stack* createStack(int v[], int n)
+Stack* createStack()
 {
     Stack* s = malloc(sizeof(Stack));
     s -> top = -1;
 
-    for(int i = 0; i < n; i++)
-        Push_vec(s, v, n);
-
     return s;
 }
 
-//pusha solo un numero nello stack
-void Push_vec(Stack *s, int v[], int n)
+void Push_vec(Stack* s, int v[], int n)
 {
-    s -> top += 1;
-    s -> arr[s -> top] = v[s -> top]; 
+    for(int i = 0; i < n; i++)
+    {
+        s -> top += 1;
+        s -> v[i] = v[i];
+    }
 }
 
-//rimuove solo un elemento alla volta, partendo dall'ultimo
 int* Pop_vec(Stack* s, int n)
 {
-    int *res = malloc(sizeof(int) * n / 2);
-    printf("%d\n", n / 2);
+    int* result = malloc(sizeof(int) * ((n - 1) / 2));
     for(int i = 0; i < n / 2; i++)
     {
-        res[i] = s -> arr[s -> top];
+        result[i] = s -> v[s -> top];
         s -> top -= 1;
     }
-    printf("\n");
-    return res;
+
+    return result;
 }
 
-void print(Stack* s, int n)
+void freeAll(Stack* s, int* v)
 {
-    //condizione di base
-    for(int i = 0; i < n; i++)
-        printf("%d ", s -> arr[i]);
-   printf("\n");
+    free(v);
+    free(s);
 }
