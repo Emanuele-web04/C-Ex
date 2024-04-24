@@ -23,9 +23,13 @@ struct stack {
 
 Stack* createStack(int len, char* string);
 //creo la funzione push che viene chiamata poi per len volte in create stack
-void push(Stack* s, char* string);
+void push(Stack* s, char value);
+//func just for pushare tutto
+void fullPush(Stack* s, char* string, int len);
+//func just for poppare uno
+char pop(Stack* s);
 //int* pop per ritornare un vettore coi valori inversi per poi fare la comparison con s nel main
-char* pop(Stack* s, int len);
+char* fullPop(Stack* s, int len);
 //free
 void freeAll(Stack* s, char* rev, char* string);
 
@@ -36,8 +40,9 @@ int main(int argc, char** argv)
     strcpy(word, argv[1]);
 
     Stack* s = createStack(len, word);
+    fullPush(s, word, len);
 
-    char* rev_string = pop(s, len);
+    char* rev_string = fullPop(s, len);
 
     int check_for_palindrome = 0;
     for(int i = 0; i < len; i++)    
@@ -58,26 +63,36 @@ Stack* createStack(int len, char* string)
     s -> top = -1;
     s -> arr = malloc(sizeof(char) * len);
 
-    for(int i = 0; i < len; i++)
-        push(s, string);
-
     return s;
 }
 
-void push(Stack* s, char* string)
+void push(Stack* s, char value)
 {
     s -> top += 1;
-    s -> arr[s -> top] = string[s -> top];
+    s -> arr[s -> top] = value;
 }
 
-char* pop(Stack* s, int len)
+
+void fullPush(Stack* s, char* string, int len)
+{
+    for(int i = 0; i < len; i++)
+        push(s, string[i]);
+}
+
+char pop(Stack* s)
+{
+    char value;
+    value = s -> arr[s -> top];
+    s -> top -= 1;
+
+    return value;
+}
+
+char* fullPop(Stack* s, int len)
 {
     char* rev_string = malloc(sizeof(char) * len);
     for(int i = 0; i < len; i++)
-    {
-        rev_string[i] = s -> arr[s -> top];
-        s -> top -= 1;
-    }
+        rev_string[i] = pop(s);
 
     return rev_string;
 }
